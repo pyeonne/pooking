@@ -1,7 +1,12 @@
-import express from "express";
+import express from 'express';
+import { config } from './config.js';
+import { connectDB } from './database/database.js';
 
 const app = express();
 
-app.listen(8800, () => {
-  console.log(`Server is started... ${new Date()}`);
-});
+connectDB()
+  .then(() => {
+    console.log(`Server is started... ${new Date()}`);
+    app.listen(config.host.port);
+  })
+  .catch(console.error);
