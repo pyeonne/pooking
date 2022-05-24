@@ -21,9 +21,15 @@ app.use((req, res, next) => {
   res.sendStatus(404);
 });
 
-app.use((error, req, res, next) => {
-  console.error(error);
-  res.sendStatus(500);
+app.use((err, req, res, next) => {
+  const errorStatus = err.stats || 500;
+  const errorMessage = err.message || 'Something went wrong! 😱';
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
 });
 
 connectDB()
