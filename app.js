@@ -1,5 +1,6 @@
 import express from 'express';
 import 'express-async-errors';
+import cookieParser from 'cookie-parser';
 import authRouter from './router/auth.js';
 import hotelsRouter from './router/hotels.js';
 import roomsRouter from './router/rooms.js';
@@ -10,6 +11,7 @@ import { connectDB } from './database/database.js';
 const app = express();
 
 // * middleware
+app.use(cookieParser());
 app.use(express.json());
 
 app.use('/auth', authRouter);
