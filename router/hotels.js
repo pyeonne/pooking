@@ -2,6 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import { body } from 'express-validator';
 import * as hotelController from '../controller/hotel.js';
+import { isAdmin, isAuth } from '../middleware/auth.js';
 import { validate } from '../middleware/validator.js';
 
 const router = express.Router();
@@ -21,14 +22,14 @@ const validateHotel = [
 // * GET /hotels
 router.get('/', hotelController.getHotels);
 
-// * GET /hotels
+// * GET /hotels/:id
 router.get('/:id', hotelController.getHotel);
 
 // * POST /hotels
 router.post('/', validateHotel, hotelController.createHotel);
 
 // * PUT /hotels/:id
-router.put('/:id', hotelController.updateHotel);
+router.put('/:id', isAuth, isAdmin, hotelController.updateHotel);
 
 // * DELETE /hotels/:id
 router.delete('/:id', hotelController.deleteHotel);

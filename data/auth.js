@@ -18,6 +18,14 @@ export async function findByUsername(username) {
   return User.findOne({ username });
 }
 
-export async function createUser(user) {
+export async function findById(id) {
+  return User.findById(id);
+}
+
+export async function create(user) {
   return new User(user).save().then((data) => data.id);
+}
+
+export async function update(id, content) {
+  return User.findByIdAndUpdate(id, { $set: content }, { new: true });
 }
