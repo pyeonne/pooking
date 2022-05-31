@@ -5,6 +5,12 @@ import * as userController from '../controller/user.js';
 
 const router = express.Router();
 
+// * GET /users
+router.get('/', userController.getUsers);
+
+// * GET /users/:id
+router.get('/:id', userController.getUser);
+
 // * PUT users/:id
 router.put('/:id', isAuth, isAdmin, userController.updateUser);
 

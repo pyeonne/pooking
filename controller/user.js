@@ -1,17 +1,17 @@
 import * as authRepository from '../data/auth.js';
 
 export async function getUsers(req, res) {
-  const data = await userRepository.getAll();
+  const data = await authRepository.getAll();
   res.status(200).json(data);
 }
 
-export async function getHotel(req, res) {
+export async function getUser(req, res) {
   const id = req.params.id;
-  const hotel = await hotelRepository.getById(id);
-  if (hotel) {
-    res.status(200).json(hotel);
+  const user = await authRepository.findById(id);
+  if (user) {
+    res.status(200).json(user);
   } else {
-    res.status(404).json({ message: `Hotel id(${id}) not found` });
+    res.status(404).json({ message: `User id(${id}) not found` });
   }
 }
 

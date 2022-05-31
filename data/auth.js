@@ -14,6 +14,10 @@ const userSchema = new Mongoose.Schema(
 useVirtualId(userSchema);
 const User = Mongoose.model('User', userSchema);
 
+export async function getAll() {
+  return User.find().sort({ createdAt: -1 });
+}
+
 export async function findByUsername(username) {
   return User.findOne({ username });
 }

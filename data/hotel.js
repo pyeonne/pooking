@@ -42,3 +42,11 @@ export async function update(id, content) {
 export async function remove(id) {
   return Hotel.findByIdAndDelete(id);
 }
+
+export async function pushRoom(id, room) {
+  return Hotel.findByIdAndUpdate(id, { $push: { rooms: room.id } });
+}
+
+export async function pullRoom(id, room) {
+  return Hotel.findByIdAndUpdate(id, { $pull: { rooms: room.id } });
+}
